@@ -5,25 +5,25 @@ one:
   backstory: MyString
   level: 1
   experience: 1
-  ability_score: 
-  skill: 
-  proficiency: 
-  language: 
-  class: 
-  race: 
-  equipment: 
-  spell: 
+  ability_score: one
+  skill: one
+  proficiency: one
+  language: one
+  class: one
+  race: one
+  equipment: one
+  spell: one
 
 two:
   name: MyString
   backstory: MyString
   level: 1
   experience: 1
-  ability_score: 
-  skill: 
-  proficiency: 
-  language: 
-  class: 
-  race: 
-  equipment: 
-  spell: 
+  ability_score: two
+  skill: two
+  proficiency: two
+  language: two
+  class: two
+  race: two
+  equipment: two
+  spell: two

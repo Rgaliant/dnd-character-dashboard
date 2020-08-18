@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_08_18_034747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ability_scores", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.string "full_name"
+    t.text "desc", default: [], array: true
+    t.text "skills", default: [], array: true
+    t.string "external_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "characters", force: :cascade do |t|
+    t.string "name"
+    t.string "backstory"
+    t.integer "level"
+    t.integer "experience"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
