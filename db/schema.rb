@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_044751) do
+ActiveRecord::Schema.define(version: 2020_08_18_045042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,22 @@ ActiveRecord::Schema.define(version: 2020_08_18_044751) do
     t.text "desc", default: [], array: true
     t.text "skills", default: [], array: true
     t.string "external_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "armors", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.string "equipment_category"
+    t.string "armor_category"
+    t.string "armor_class"
+    t.string "str_minimum"
+    t.boolean "stealth_disadvantage"
+    t.string "cost"
+    t.integer "weight"
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -75,6 +91,16 @@ ActiveRecord::Schema.define(version: 2020_08_18_044751) do
     t.string "type"
     t.text "typical_speakers", default: [], array: true
     t.string "script"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "magic_schools", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.string "desc"
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
