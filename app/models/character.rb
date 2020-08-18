@@ -10,4 +10,6 @@ class Character < ApplicationRecord
   has_many :armors
   has_many :spells
   has_many :traits
+  
+  has_many :characters_traits
 end
