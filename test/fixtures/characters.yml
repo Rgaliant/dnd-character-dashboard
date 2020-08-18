@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  backstory: MyString
+  level: 1
+  experience: 1
+  ability_score: 
+  skill: 
+  proficiency: 
+  language: 
+  class: 
+  race: 
+  equipment: 
+  spell: 
+
+two:
+  name: MyString
+  backstory: MyString
+  level: 1
+  experience: 1
+  ability_score: 
+  skill: 
+  proficiency: 
+  language: 
+  class: 
+  race: 
+  equipment: 
+  spell: 
