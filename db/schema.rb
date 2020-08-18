@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_034947) do
+ActiveRecord::Schema.define(version: 2020_08_18_035220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,30 @@ ActiveRecord::Schema.define(version: 2020_08_18_034947) do
     t.string "backstory"
     t.integer "level"
     t.integer "experience"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.string "type"
+    t.text "typical_speakers", default: [], array: true
+    t.string "script"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "proficiencies", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "type"
+    t.string "name"
+    t.text "classes", default: [], array: true
+    t.text "races", default: [], array: true
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
