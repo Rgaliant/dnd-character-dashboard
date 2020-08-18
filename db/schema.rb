@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_041055) do
+ActiveRecord::Schema.define(version: 2020_08_18_043823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,30 @@ ActiveRecord::Schema.define(version: 2020_08_18_041055) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "spells", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.text "desc"
+    t.text "higher_level"
+    t.string "range"
+    t.text "components"
+    t.string "material"
+    t.boolean "ritual"
+    t.string "duration"
+    t.boolean "concentration"
+    t.string "casting_time"
+    t.integer "level"
+    t.string "school"
+    t.bigint "char_class_id", null: false
+    t.bigint "sub_char_class_id", null: false
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["char_class_id"], name: "index_spells_on_char_class_id"
+    t.index ["sub_char_class_id"], name: "index_spells_on_sub_char_class_id"
+  end
+
   create_table "sub_char_classes", force: :cascade do |t|
     t.string "external_id"
     t.string "external_index"
@@ -174,6 +198,8 @@ ActiveRecord::Schema.define(version: 2020_08_18_041055) do
   add_foreign_key "features", "sub_char_classes"
   add_foreign_key "races", "languages"
   add_foreign_key "races", "proficiencies"
+  add_foreign_key "spells", "char_classes"
+  add_foreign_key "spells", "sub_char_classes"
   add_foreign_key "sub_char_classes", "char_classes"
   add_foreign_key "subraces", "languages"
   add_foreign_key "subraces", "proficiencies"

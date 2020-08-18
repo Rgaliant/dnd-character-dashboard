@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  desc: MyText
+  higher_level: MyText
+  range: MyString
+  components: MyText
+  material: MyString
+  ritual: 
+  duration: MyString
+  concentration: 
+  casting_time: MyString
+  level: 1
+  school: MyString
+  class: one
+  subclass: one
+  url: MyString
+
+two:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  desc: MyText
+  higher_level: MyText
+  range: MyString
+  components: MyText
+  material: MyString
+  ritual: 
+  duration: MyString
+  concentration: 
+  casting_time: MyString
+  level: 1
+  school: MyString
+  class: two
+  subclass: two
+  url: MyString

@@ -5,6 +5,7 @@ class CreateAbilityScores < ActiveRecord::Migration[6.0]
       t.string :external_index
       t.string :name
       t.string :full_name
+      t.integer :level
       t.text :desc, array: true, default: []
       t.text :skills, array: true, default: []
       t.string :external_url
