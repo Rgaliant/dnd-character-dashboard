@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  speed: 1
+  ability_bonuses: MyText
+  alignment: MyText
+  age: MyString
+  size: MyString
+  size_description: MyString
+  proficiency: one
+  language: one
+  language_desc: MyText
+  traits: MyText
+  subraces: MyText
+  url: MyString
+
+two:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  speed: 1
+  ability_bonuses: MyText
+  alignment: MyText
+  age: MyString
+  size: MyString
+  size_description: MyString
+  proficiency: two
+  language: two
+  language_desc: MyText
+  traits: MyText
+  subraces: MyText
+  url: MyString
