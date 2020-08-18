@@ -5,7 +5,7 @@ class CreateCharacters < ActiveRecord::Migration[6.0]
       t.string :backstory
       t.integer :level
       t.integer :experience
-
+      
       t.timestamps
     end
   end
