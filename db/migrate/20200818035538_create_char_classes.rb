@@ -7,10 +7,10 @@ class CreateCharClasses < ActiveRecord::Migration[6.0]
       t.string :hit_die
       t.string :proficiency_choices
       t.references :proficiency, null: false, foreign_key: true
-      t.text :saving_throws
-      t.text :starting_equipment
-      t.text :class_levels
-      t.text :spellcasting
+      t.text :saving_throws, array: true, default: []
+      t.text :starting_equipment, array: true, default: []
+      t.text :class_levels, array: true, default: []
+      t.text :spellcasting, array: true, default: []
       t.string :url
 
       t.timestamps
