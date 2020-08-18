@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_035659) do
+ActiveRecord::Schema.define(version: 2020_08_18_035953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,21 @@ ActiveRecord::Schema.define(version: 2020_08_18_035659) do
     t.integer "experience"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.string "level"
+    t.bigint "char_class_id", null: false
+    t.bigint "sub_char_class_id", null: false
+    t.text "desc", default: [], array: true
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["char_class_id"], name: "index_features_on_char_class_id"
+    t.index ["sub_char_class_id"], name: "index_features_on_sub_char_class_id"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -101,5 +116,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_035659) do
   end
 
   add_foreign_key "char_classes", "proficiencies"
+  add_foreign_key "features", "char_classes"
+  add_foreign_key "features", "sub_char_classes"
   add_foreign_key "sub_char_classes", "char_classes"
 end
