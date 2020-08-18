@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_040449) do
+ActiveRecord::Schema.define(version: 2020_08_18_041055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,10 +137,47 @@ ActiveRecord::Schema.define(version: 2020_08_18_040449) do
     t.index ["char_class_id"], name: "index_sub_char_classes_on_char_class_id"
   end
 
+  create_table "subraces", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.bigint "race_id", null: false
+    t.string "desc"
+    t.text "ability_bonus"
+    t.bigint "proficiency_id", null: false
+    t.bigint "language_id", null: false
+    t.bigint "trait_id", null: false
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["language_id"], name: "index_subraces_on_language_id"
+    t.index ["proficiency_id"], name: "index_subraces_on_proficiency_id"
+    t.index ["race_id"], name: "index_subraces_on_race_id"
+    t.index ["trait_id"], name: "index_subraces_on_trait_id"
+  end
+
+  create_table "traits", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.bigint "race_id", null: false
+    t.text "subrace"
+    t.string "name"
+    t.text "desc", null: false
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["race_id"], name: "index_traits_on_race_id"
+  end
+
   add_foreign_key "char_classes", "proficiencies"
   add_foreign_key "features", "char_classes"
   add_foreign_key "features", "sub_char_classes"
   add_foreign_key "races", "languages"
   add_foreign_key "races", "proficiencies"
   add_foreign_key "sub_char_classes", "char_classes"
+  add_foreign_key "subraces", "languages"
+  add_foreign_key "subraces", "proficiencies"
+  add_foreign_key "subraces", "races"
+  add_foreign_key "subraces", "traits"
+  add_foreign_key "traits", "races"
 end

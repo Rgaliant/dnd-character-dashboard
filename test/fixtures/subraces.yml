@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  race: one
+  desc: MyString
+  ability_bonus: MyText
+  proficency: one
+  language: one
+  trait: one
+  url: MyString
+
+two:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  race: two
+  desc: MyString
+  ability_bonus: MyText
+  proficency: two
+  language: two
+  trait: two
+  url: MyString
