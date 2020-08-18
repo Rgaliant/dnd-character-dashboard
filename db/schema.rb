@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_050930) do
+ActiveRecord::Schema.define(version: 2020_08_18_052345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 2020_08_18_050930) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "ability_scores_characters", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "ability_score_id", null: false
+  end
+
   create_table "armors", force: :cascade do |t|
     t.string "external_id"
     t.string "external_index"
@@ -42,6 +47,11 @@ ActiveRecord::Schema.define(version: 2020_08_18_050930) do
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "armors_characters", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "armor_id", null: false
   end
 
   create_table "char_classes", force: :cascade do |t|
@@ -61,6 +71,11 @@ ActiveRecord::Schema.define(version: 2020_08_18_050930) do
     t.index ["proficiency_id"], name: "index_char_classes_on_proficiency_id"
   end
 
+  create_table "char_classes_characters", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "char_class_id", null: false
+  end
+
   create_table "characters", force: :cascade do |t|
     t.string "name"
     t.string "backstory"
@@ -68,28 +83,46 @@ ActiveRecord::Schema.define(version: 2020_08_18_050930) do
     t.integer "experience"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "ability_score_id", null: false
-    t.bigint "skill_id", null: false
-    t.bigint "proficiency_id", null: false
+  end
+
+  create_table "characters_languages", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
     t.bigint "language_id", null: false
-    t.bigint "char_class_id", null: false
-    t.bigint "sub_char_class_id", null: false
+  end
+
+  create_table "characters_proficiencies", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "proficiency_id", null: false
+  end
+
+  create_table "characters_races", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
     t.bigint "race_id", null: false
-    t.bigint "weapon_id", null: false
-    t.bigint "armor_id", null: false
+  end
+
+  create_table "characters_skills", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "skill_id", null: false
+  end
+
+  create_table "characters_spells", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
     t.bigint "spell_id", null: false
+  end
+
+  create_table "characters_sub_char_classes", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "sub_char_class_id", null: false
+  end
+
+  create_table "characters_traits", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
     t.bigint "trait_id", null: false
-    t.index ["ability_score_id"], name: "index_characters_on_ability_score_id"
-    t.index ["armor_id"], name: "index_characters_on_armor_id"
-    t.index ["char_class_id"], name: "index_characters_on_char_class_id"
-    t.index ["language_id"], name: "index_characters_on_language_id"
-    t.index ["proficiency_id"], name: "index_characters_on_proficiency_id"
-    t.index ["race_id"], name: "index_characters_on_race_id"
-    t.index ["skill_id"], name: "index_characters_on_skill_id"
-    t.index ["spell_id"], name: "index_characters_on_spell_id"
-    t.index ["sub_char_class_id"], name: "index_characters_on_sub_char_class_id"
-    t.index ["trait_id"], name: "index_characters_on_trait_id"
-    t.index ["weapon_id"], name: "index_characters_on_weapon_id"
+  end
+
+  create_table "characters_weapons", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "weapon_id", null: false
   end
 
   create_table "features", force: :cascade do |t|
@@ -258,17 +291,6 @@ ActiveRecord::Schema.define(version: 2020_08_18_050930) do
   end
 
   add_foreign_key "char_classes", "proficiencies"
-  add_foreign_key "characters", "ability_scores"
-  add_foreign_key "characters", "armors"
-  add_foreign_key "characters", "char_classes"
-  add_foreign_key "characters", "languages"
-  add_foreign_key "characters", "proficiencies"
-  add_foreign_key "characters", "races"
-  add_foreign_key "characters", "skills"
-  add_foreign_key "characters", "spells"
-  add_foreign_key "characters", "sub_char_classes"
-  add_foreign_key "characters", "traits"
-  add_foreign_key "characters", "weapons"
   add_foreign_key "features", "char_classes"
   add_foreign_key "features", "sub_char_classes"
   add_foreign_key "races", "languages"
