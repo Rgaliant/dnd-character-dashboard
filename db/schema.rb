@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_043823) do
+ActiveRecord::Schema.define(version: 2020_08_18_044751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,23 @@ ActiveRecord::Schema.define(version: 2020_08_18_043823) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["race_id"], name: "index_traits_on_race_id"
+  end
+
+  create_table "weapons", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.string "equipment_category"
+    t.string "weapon_category"
+    t.string "weapon_range"
+    t.string "category_range"
+    t.string "cost"
+    t.string "damage"
+    t.string "range"
+    t.string "weight"
+    t.string "weapon_properties"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "char_classes", "proficiencies"

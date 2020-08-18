@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  equipment_category: MyString
+  weapon_category: MyString
+  weapon_range: MyString
+  category_range: MyString
+  cost: MyString
+  damage: MyString
+  range: MyString
+  weight: MyString
+  weapon_properties: MyString
+
+two:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  equipment_category: MyString
+  weapon_category: MyString
+  weapon_range: MyString
+  category_range: MyString
+  cost: MyString
+  damage: MyString
+  range: MyString
+  weight: MyString
+  weapon_properties: MyString
