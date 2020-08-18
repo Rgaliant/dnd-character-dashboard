@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  hit_die: MyString
+  proficiency_choices: MyString
+  proficiency: one
+  saving_throws: MyText
+  starting_equipment: MyText
+  class_levels: MyText
+  spellcasting: MyText
+  url: MyString
+
+two:
+  external_id: MyString
+  external_index: MyString
+  name: MyString
+  hit_die: MyString
+  proficiency_choices: MyString
+  proficiency: two
+  saving_throws: MyText
+  starting_equipment: MyText
+  class_levels: MyText
+  spellcasting: MyText
+  url: MyString
