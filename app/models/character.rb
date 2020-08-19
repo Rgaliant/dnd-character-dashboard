@@ -4,7 +4,7 @@ class Character < ApplicationRecord
   has_many :characters_ability_scores
   has_many :characters_proficiencies
   has_many :characters_languages
-  has_many :characters_sub_char_classes
+  has_many :characters_char_classes
   has_many :characters_sub_char_classes
   has_many :characters_races
   has_many :characters_weapons
@@ -13,6 +13,7 @@ class Character < ApplicationRecord
   has_many :characters_traits
   has_many :characters_features
   has_many :characters_subraces
+  has_many :characters_skills
 
   ## define the through relations
   has_many :ability_scores, through: :characters_ability_scores
