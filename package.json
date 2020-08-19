@@ -2,8 +2,8 @@
   "name": "dnd-character-dashboard",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Rgaliant <ryanwfgale@gmail.com>",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -15,6 +15,7 @@
     "install": "cd client && yarn"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "styled-components": "^5.1.1"
+  }
 }

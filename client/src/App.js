@@ -11,9 +11,7 @@ const fetchTestDatas = function () {
 function App() {
   return (
     <div className="App">
-      <button onClick={fetchTestDatas}>
-        Fetch Test Datas
-      </button>
+      <h2>DnD Character Dashboard</h2>
     </div>
   );
 }
