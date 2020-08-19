@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_170057) do
+ActiveRecord::Schema.define(version: 2020_08_19_200046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2020_08_19_170057) do
     t.string "name"
     t.string "hit_die"
     t.string "proficiency_choices"
-    t.bigint "proficiency_id", null: false
     t.text "saving_throws", default: [], array: true
     t.text "starting_equipment", default: [], array: true
     t.text "class_levels", default: [], array: true
@@ -57,7 +56,6 @@ ActiveRecord::Schema.define(version: 2020_08_19_170057) do
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["proficiency_id"], name: "index_char_classes_on_proficiency_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -205,7 +203,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_170057) do
     t.string "external_id"
     t.string "external_index"
     t.string "name"
-    t.string "type"
+    t.string "lang_type"
     t.text "typical_speakers", default: [], array: true
     t.string "script"
     t.string "url"
@@ -226,7 +224,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_170057) do
   create_table "proficiencies", force: :cascade do |t|
     t.string "external_id"
     t.string "external_index"
-    t.string "type"
+    t.string "prof_type"
     t.string "name"
     t.text "classes", default: [], array: true
     t.text "races", default: [], array: true
@@ -351,7 +349,6 @@ ActiveRecord::Schema.define(version: 2020_08_19_170057) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "char_classes", "proficiencies"
   add_foreign_key "characters_ability_scores", "ability_scores"
   add_foreign_key "characters_ability_scores", "characters"
   add_foreign_key "characters_armors", "armors"

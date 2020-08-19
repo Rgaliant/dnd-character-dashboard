@@ -5,7 +5,6 @@ class SelectsController < ApplicationController
     before_action :validate_data, only: :index
   
     def index
-        binding.pry
       data = klass.joins(joins_statement)
                   .where(*where_statements)
                   .select(*select_statements)

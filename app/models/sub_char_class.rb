@@ -1,5 +1,5 @@
 class SubCharClass < ApplicationRecord
-  belongs_to :class
+  has_many :char_classes
 
   has_many :characters_sub_char_class
 end
