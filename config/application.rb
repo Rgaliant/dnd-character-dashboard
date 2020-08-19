@@ -19,6 +19,8 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
 module DndCharacterDashboard
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -33,5 +35,10 @@ module DndCharacterDashboard
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    ## establish connection in console on open
+    console do
+      ActiveRecord::Base.connection
+    end   
   end
 end
