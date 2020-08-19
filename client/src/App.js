@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import SkillSelect from './components/SkillSelect'
 
 const fetchCharactersData = function () {
   fetch('/api/v1/characters')
@@ -12,6 +13,7 @@ const App = () => {
   return (
     <div className="App">
       <h2>DnD Character Dashboard</h2>
+      <SkillSelect label="skill" />
     </div>
   );
 }
