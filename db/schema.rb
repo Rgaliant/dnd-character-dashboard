@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_053436) do
+ActiveRecord::Schema.define(version: 2020_08_19_170057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,15 @@ ActiveRecord::Schema.define(version: 2020_08_18_053436) do
     t.index ["character_id"], name: "index_characters_char_classes_on_character_id"
   end
 
+  create_table "characters_features", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "feature_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_characters_features_on_character_id"
+    t.index ["feature_id"], name: "index_characters_features_on_feature_id"
+  end
+
   create_table "characters_languages", force: :cascade do |t|
     t.bigint "character_id", null: false
     t.bigint "language_id", null: false
@@ -148,6 +157,15 @@ ActiveRecord::Schema.define(version: 2020_08_18_053436) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["character_id"], name: "index_characters_sub_char_classes_on_character_id"
     t.index ["sub_char_class_id"], name: "index_characters_sub_char_classes_on_sub_char_class_id"
+  end
+
+  create_table "characters_subraces", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "subrace_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_characters_subraces_on_character_id"
+    t.index ["subrace_id"], name: "index_characters_subraces_on_subrace_id"
   end
 
   create_table "characters_traits", force: :cascade do |t|
@@ -340,6 +358,8 @@ ActiveRecord::Schema.define(version: 2020_08_18_053436) do
   add_foreign_key "characters_armors", "characters"
   add_foreign_key "characters_char_classes", "char_classes"
   add_foreign_key "characters_char_classes", "characters"
+  add_foreign_key "characters_features", "characters"
+  add_foreign_key "characters_features", "features"
   add_foreign_key "characters_languages", "characters"
   add_foreign_key "characters_languages", "languages"
   add_foreign_key "characters_proficiencies", "characters"
@@ -352,6 +372,8 @@ ActiveRecord::Schema.define(version: 2020_08_18_053436) do
   add_foreign_key "characters_spells", "spells"
   add_foreign_key "characters_sub_char_classes", "characters"
   add_foreign_key "characters_sub_char_classes", "sub_char_classes"
+  add_foreign_key "characters_subraces", "characters"
+  add_foreign_key "characters_subraces", "subraces"
   add_foreign_key "characters_traits", "characters"
   add_foreign_key "characters_traits", "traits"
   add_foreign_key "characters_weapons", "characters"

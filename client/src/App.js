@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 
-const fetchTestDatas = function () {
-  fetch('/api/v1/tests')
+const fetchCharactersData = function () {
+  fetch('/api/v1/characters')
     .then(res => res.json())
-    .then((response) => { console.log("Test datas response", response); })
+    .then((response) => { console.log("Test character response", response); })
     .catch((error) => { console.log("Error while fetching test datas", error); })
 }
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <h2>DnD Character Dashboard</h2>
