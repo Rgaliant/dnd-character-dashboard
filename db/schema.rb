@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_200046) do
+ActiveRecord::Schema.define(version: 2020_08_23_222800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,14 +243,10 @@ ActiveRecord::Schema.define(version: 2020_08_19_200046) do
     t.string "age"
     t.string "size"
     t.string "size_description"
-    t.bigint "proficiency_id", null: false
-    t.bigint "language_id", null: false
     t.text "language_desc"
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["language_id"], name: "index_races_on_language_id"
-    t.index ["proficiency_id"], name: "index_races_on_proficiency_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -307,16 +303,10 @@ ActiveRecord::Schema.define(version: 2020_08_19_200046) do
     t.bigint "race_id", null: false
     t.string "desc"
     t.text "ability_bonus"
-    t.bigint "proficiency_id", null: false
-    t.bigint "language_id", null: false
-    t.bigint "trait_id", null: false
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["language_id"], name: "index_subraces_on_language_id"
-    t.index ["proficiency_id"], name: "index_subraces_on_proficiency_id"
     t.index ["race_id"], name: "index_subraces_on_race_id"
-    t.index ["trait_id"], name: "index_subraces_on_trait_id"
   end
 
   create_table "traits", force: :cascade do |t|
@@ -377,14 +367,9 @@ ActiveRecord::Schema.define(version: 2020_08_19_200046) do
   add_foreign_key "characters_weapons", "weapons"
   add_foreign_key "features", "char_classes"
   add_foreign_key "features", "sub_char_classes"
-  add_foreign_key "races", "languages"
-  add_foreign_key "races", "proficiencies"
   add_foreign_key "spells", "char_classes"
   add_foreign_key "spells", "sub_char_classes"
   add_foreign_key "sub_char_classes", "char_classes"
-  add_foreign_key "subraces", "languages"
-  add_foreign_key "subraces", "proficiencies"
   add_foreign_key "subraces", "races"
-  add_foreign_key "subraces", "traits"
   add_foreign_key "traits", "races"
 end

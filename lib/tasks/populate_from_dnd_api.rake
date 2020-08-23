@@ -131,4 +131,77 @@ namespace :populate_db do
             )
         end
     end
+
+    task races: :environment do 
+        puts 'populating races'
+        races_index = HTTParty.get("#{base_url}/api/races")
+        races_index.delete("count")
+        races_urls = races_index["results"].map{ |race| race["url"]}
+        
+        races_urls.each do |url|
+            race = HTTParty.get("#{base_url}#{url}").with_indifferent_access 
+            ## TODO: add classes to subclasses
+
+            ## find ids for associations
+            proficiency_names = race[:starting_proficiencies].map{ |p| p["name"] }
+            proficiency_ids = Proficiency.where(name: proficiency_names).ids
+            language_names = race[:languages].map{ |p| p["name"] }
+            language_ids = Language.where(name: language_names).ids
+            trait_names = race[:traits].map{ |p| p["name"] }
+            trait_ids = Trait.where(name: trait_names).ids
+            subrace_names = race[:subraces].map{ |p| p["name"] }
+            subrace_ids = Subrace.where(name: subrace_names).ids
+
+            puts "adding race #{race[:name]}"
+            Race.create(
+                external_id: race[:_id],
+                external_index: race[:index],
+                name: race[:name],
+                speed: race[:speed],
+                ability_bonuses: race[:ability_bonuses],
+                alignment: race[:alignment],
+                age: race[:age],
+                size: race[:size],
+                size_description: race[:size_description],
+                language_desc: race[:language_desc],
+                url: race[:url]
+            )
+        end
+    end
+
+    task subraces: :environment do 
+        puts 'populating subraces'
+        subraces_index = HTTParty.get("#{base_url}/api/subraces")
+        subraces_index.delete("count")
+        subraces_urls = subraces_index["results"].map{ |race| race["url"]}
+        
+        subraces_urls.each do |url|
+            subrace = HTTParty.get("#{base_url}#{url}").with_indifferent_access 
+            ## TODO: add classes to subclasses
+
+            ## find ids for associations
+            proficiency_names = subrace[:starting_proficiencies].map{ |p| p["name"] }
+            proficiency_ids = Proficiency.where(name: proficiency_names).ids
+            language_names = subrace[:languages].map{ |p| p["name"] }
+            language_ids = Language.where(name: language_names).ids
+            # language_option_names = subrace[:language_options].map{ |p| p["name"] }
+            # language_option_ids = Language.where(name: language_option_names).ids
+            trait_names = subrace[:racial_traits].map{ |p| p["name"] }
+            trait_ids = Trait.where(name: trait_names).ids
+            race_name = subrace[:race]["name"]
+            race_id = Race.find_by(name: race_name).id
+
+            puts "adding subrace #{subrace[:name]}"
+
+            Subrace.create(
+                external_id: subrace[:_id],
+                external_index: subrace[:index],
+                name: subrace[:name],
+                desc: subrace[:desc],
+                ability_bonus: subrace[:ability_bonuses],
+                race_id: race_id,
+                url: subrace[:url]
+            )
+        end
+    end
 end
