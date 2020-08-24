@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'tests', to: 'tests#index'
       get 'char_classes', to: 'char_classes#index'
+      get 'sub_char_classes', to: 'sub_char_classes#index'
     end
   end
   # Route/controller for simple select dropdown data queries
