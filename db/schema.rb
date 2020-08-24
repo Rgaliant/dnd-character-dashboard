@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_23_222800) do
+ActiveRecord::Schema.define(version: 2020_08_24_010154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,19 @@ ActiveRecord::Schema.define(version: 2020_08_23_222800) do
     t.index ["sub_char_class_id"], name: "index_features_on_sub_char_class_id"
   end
 
+  create_table "gears", force: :cascade do |t|
+    t.string "external_id"
+    t.string "external_index"
+    t.string "name"
+    t.text "equipment_category"
+    t.string "gear_category"
+    t.string "cost"
+    t.string "weight"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string "external_id"
     t.string "external_index"
@@ -275,13 +288,9 @@ ActiveRecord::Schema.define(version: 2020_08_23_222800) do
     t.string "casting_time"
     t.integer "level"
     t.string "school"
-    t.bigint "char_class_id", null: false
-    t.bigint "sub_char_class_id", null: false
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["char_class_id"], name: "index_spells_on_char_class_id"
-    t.index ["sub_char_class_id"], name: "index_spells_on_sub_char_class_id"
   end
 
   create_table "sub_char_classes", force: :cascade do |t|
@@ -312,14 +321,11 @@ ActiveRecord::Schema.define(version: 2020_08_23_222800) do
   create_table "traits", force: :cascade do |t|
     t.string "external_id"
     t.string "external_index"
-    t.bigint "race_id", null: false
-    t.text "subrace"
     t.string "name"
     t.text "desc", null: false
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["race_id"], name: "index_traits_on_race_id"
   end
 
   create_table "weapons", force: :cascade do |t|
@@ -367,9 +373,6 @@ ActiveRecord::Schema.define(version: 2020_08_23_222800) do
   add_foreign_key "characters_weapons", "weapons"
   add_foreign_key "features", "char_classes"
   add_foreign_key "features", "sub_char_classes"
-  add_foreign_key "spells", "char_classes"
-  add_foreign_key "spells", "sub_char_classes"
   add_foreign_key "sub_char_classes", "char_classes"
   add_foreign_key "subraces", "races"
-  add_foreign_key "traits", "races"
 end

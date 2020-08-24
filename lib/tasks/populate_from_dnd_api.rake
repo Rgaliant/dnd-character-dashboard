@@ -121,14 +121,19 @@ namespace :populate_db do
         sub_char_classes_urls.each do |url|
             sub_char_class = HTTParty.get("#{base_url}#{url}").with_indifferent_access 
             ## TODO: add classes to subclasses
+            char_class_name = sub_char_class[:class]["name"]
+            char_class_id = CharClass.find_by(name: char_class_name).id
+            puts "adding subclass #{sub_char_class[:name]}"
 
-            SubCharClass.create(
+            sub_char_class_obj = SubCharClass.create(
                 external_id: sub_char_class[:_id],
                 external_index: sub_char_class[:index],
                 name: sub_char_class[:name],
                 sub_char_class_flavor: sub_char_class[:subclass_flavor],
-                desc: sub_char_class[:desc].to_s
+                desc: sub_char_class[:desc].to_s,
+                char_class_id: char_class_id
             )
+            sub_char_class_obj.save!
         end
     end
 
@@ -202,6 +207,166 @@ namespace :populate_db do
                 race_id: race_id,
                 url: subrace[:url]
             )
+        end
+    end
+
+    task traits: :environment do 
+        puts 'populating traits'
+        traits_index = HTTParty.get("#{base_url}/api/traits")
+        traits_index.delete("count")
+        traits_urls = traits_index["results"].map{ |trait| trait["url"]}
+        
+        traits_urls.each do |url|
+            trait = HTTParty.get("#{base_url}#{url}").with_indifferent_access 
+            ## TODO: add classes to subclasses
+
+            ## find ids for associations
+            race_name = trait[:races].map{ |p| p["name"] }
+            race_ids = Race.where(name: race_name).ids
+
+            puts "adding trait #{trait[:name]}"
+
+            trait = Trait.create(
+                external_id: trait[:_id],
+                external_index: trait[:index],
+                name: trait[:name],
+                desc: trait[:desc],
+                url: trait[:url]
+            )
+            trait.save!
+        end
+    end
+
+    task equipment: :environment do 
+        puts 'populating equipment'
+        equipment_index = HTTParty.get("#{base_url}/api/equipment")
+        equipment_index.delete("count")
+        equipment_urls = equipment_index["results"].map{ |equipment| equipment["url"]}
+        
+        equipment_urls.each do |url|
+            equipment = HTTParty.get("#{base_url}#{url}").with_indifferent_access 
+            ## TODO: add classes to subclasses
+
+            ## find ids for associations
+
+            if equipment[:equipment_category]["name"] == "Armor"
+                puts "adding Armor #{equipment[:name]}"
+
+                armor = Armor.create(
+                    external_id: equipment[:_id],
+                    external_index: equipment[:index],
+                    name: equipment[:name],
+                    equipment_category: equipment[:equipment_category],
+                    armor_category: equipment[:armor_category],
+                    armor_class: equipment[:armor_class],
+                    str_minimum: equipment[:str_minimum],
+                    stealth_disadvantage: equipment[:stealth_disadvantage],
+                    weight: equipment[:weight],
+                    cost: equipment[:cost],
+                    url: equipment[:url]
+                )
+                armor.save!
+            elsif equipment[:equipment_category]["name"] == "Weapon"
+                puts "adding weapon #{equipment[:name]}"
+
+                weapon = Weapon.create(
+                    external_id: equipment[:_id],
+                    external_index: equipment[:index],
+                    name: equipment[:name],
+                    equipment_category: equipment[:equipment_category],
+                    weapon_category: equipment[:weapon_category],
+                    weapon_range: equipment[:weapon_range],
+                    category_range: equipment[:category_range],
+                    weight: equipment[:weight],
+                    cost: equipment[:cost],
+                    damage: equipment[:damage],
+                    range: equipment[:range],
+                    weapon_properties: equipment[:properties]
+                )
+                weapon.save!
+            else
+                puts "adding gear #{equipment[:name]}"
+
+                gear = Gear.create(
+                    external_id: equipment[:_id],
+                    external_index: equipment[:index],
+                    name: equipment[:name],
+                    equipment_category: equipment[:equipment_category],
+                    gear_category: equipment[:gear_category],
+                    weight: equipment[:weight],
+                    cost: equipment[:cost],
+                    url: equipment[:url]
+                )
+                gear.save!
+            end
+        end
+    end
+
+    task magic_schools: :environment do 
+        puts 'populating magic schools '
+        school_index = HTTParty.get("#{base_url}/api/magic-schools")
+        school_index.delete("count")
+        school_urls = school_index["results"].map{ |school| school["url"]}
+        
+        school_urls.each do |url|
+            school = HTTParty.get("#{base_url}#{url}").with_indifferent_access 
+            ## TODO: add classes to subclasses
+
+            ## find ids for associations
+        
+
+            puts "adding magic school #{school[:name]}"
+
+            school = MagicSchool.create(
+                external_id: school[:_id],
+                external_index: school[:index],
+                name: school[:name],
+                desc: school[:desc],
+                url: school[:url]
+            )
+            school.save!
+        end
+    end
+
+    task spells: :environment do 
+        puts 'populating spells'
+        spells_index = HTTParty.get("#{base_url}/api/spells")
+        spells_index.delete("count")
+        spells_urls = spells_index["results"].map{ |spell| spell["url"]}
+        
+        spells_urls.each do |url|
+            spell = HTTParty.get("#{base_url}#{url}").with_indifferent_access 
+            ## TODO: add classes to subclasses
+
+            ## find ids for associations
+            school_name = spell[:school]["name"]
+            school_id = MagicSchool.find_by(name: school_name).id
+            char_class_names = spell[:classes].map{ |p| p["name"] }
+            char_class_ids = CharClass.where(name: char_class_names)
+            sub_char_class_names = spell[:subclasses].map{ |p| p["name"] }
+            sub_char_class_ids = SubCharClass.where(name: sub_char_class_names).ids
+        
+
+            puts "adding spell #{spell[:name]}"
+
+            spell = Spell.create(
+                external_id: spell[:_id],
+                external_index: spell[:index],
+                name: spell[:name],
+                desc: spell[:desc],
+                url: spell[:url],
+                higher_level: spell[:higher_level],
+                range: spell[:range],
+                components: spell[:components],
+                material: spell[:material],
+                ritual: spell[:ritual],
+                duration: spell[:duration],
+                concentration: spell[:concentration],
+                casting_time: spell[:casting_time],
+                level: spell[:level],
+                school: spell[:school]
+            )
+            spell.save!
         end
     end
 end
