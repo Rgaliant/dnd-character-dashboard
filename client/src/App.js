@@ -1,14 +1,20 @@
 import React from 'react';
 import './App.css';
-import SkillSelect from './components/SkillSelect'
-import CharClassSelect from './components/CharClassSelect';
+import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import MasterIndex from './components/MasterIndex';
+
+
 
 const App = () => {
   return (
     <div className="App">
-      <h2>DnD Character Dashboard</h2>
-      <SkillSelect label="skill" />
-      <CharClassSelect />
+      <Navbar />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/master-index' component={MasterIndex} />
+      </Switch>
     </div>
   );
 }
