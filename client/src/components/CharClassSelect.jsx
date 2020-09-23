@@ -13,6 +13,7 @@ const CharClassSelect = props => (
     label={props.label}
     placeholder={'Select...'}
     name={'char_class_select'}
+    onSelect={props.onChange}
     {...props}
   />
 );
